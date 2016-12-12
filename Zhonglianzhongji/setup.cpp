@@ -12,7 +12,7 @@ bool timeSetOK = false; //时间设置完毕标志
 QString DateTimeSetup;
 
 
-uint bjd[4] = {0};
+uint bjd[6] = {0};
 //uint kaku_tlgt = 88;
 //uint kaku_syq = 77;
 bool flag_bjd = true;
@@ -28,6 +28,16 @@ int ftq_zs = 80;//复脱器
 int syq_zs = 80; //升运器
 int qsq_zs = 80; //切碎器
 int gq_zs = 80;//过桥转速
+
+
+int muchanliang = 80;//亩产量
+int getaikuandu = 80;//割台宽度
+
+int kaku_muchanliang;
+int kaku_getaikuandu;
+
+int ka_muchanliang;
+int ka_getaikuandu;
 
 
 
@@ -173,7 +183,10 @@ void Setup::paintEvent(QPaintEvent *)
              ka_ftq  = bjd[1];
              ka_syq  = bjd[2];
 
-             startflag = bjd[3];
+             ka_muchanliang = bjd[3];
+             ka_getaikuandu = bjd[4];
+
+             startflag = bjd[5];
 
              if (flag_bjd)
              {
@@ -181,9 +194,17 @@ void Setup::paintEvent(QPaintEvent *)
                  ui->label_2->setText(QString::number(bjd[1],10));
                  ui->label_3->setText(QString::number(bjd[2],10));
 
+                ui->label_4->setText(QString::number(bjd[3],10));
+                ui->label_5->setText(QString::number(bjd[4],10));
+
                  kaku_tlgt = bjd[0];
                  kaku_ftq = bjd[1];
                  kaku_syq = bjd[2];
+
+                 kaku_muchanliang = bjd[3];
+                 kaku_getaikuandu = bjd[4];
+
+
 
              }
              else
@@ -193,6 +214,9 @@ void Setup::paintEvent(QPaintEvent *)
                   ui->label_2->setText(QString::number(kaku_ftq,10));//kaku_qsq
 
                   ui->label_3->setText(QString::number(kaku_syq,10));//kaku_qsq
+
+                  ui->label_4->setText(QString::number(kaku_muchanliang,10));
+                  ui->label_5->setText(QString::number(kaku_getaikuandu,10));
              }
 
              query.exec(QObject::tr("drop jy8c"));
@@ -256,6 +280,19 @@ void Setup::on_pushButton_clicked()
              //query.bindValue(":name", QObject::tr("升运转速"));
              query.bindValue(":age", kaku_syq);//ui->label_3->text().toInt()
              query.exec();
+
+
+             query.bindValue(":id",4);
+             //query.bindValue(":name", QObject::tr("亩产量"));
+             query.bindValue(":age", kaku_muchanliang);//ui->label_3->text().toInt()
+             query.exec();
+
+
+             query.bindValue(":id",5);
+             //query.bindValue(":name", QObject::tr("割台宽度"));
+             query.bindValue(":age", kaku_getaikuandu);//ui->label_3->text().toInt()
+             query.exec();
+
 
              query.bindValue(":id",8);
              //query.bindValue(":name", QObject::tr("初始化标志"));
@@ -473,7 +510,141 @@ void Setup::on_pushButton_7_clicked()//升运器转速 +
     }
 }
 
+
+
+
+void Setup::on_pushButton_9_clicked()//亩产量 -
+{
+    if(startflag==0)
+    {
+
+        flag_bjd = false;
+        muchanliang--;
+        ui->label_4->setText(QString::number(muchanliang,10));
+        kaku_muchanliang = muchanliang;
+        startflag = 1;
+    }
+    else
+    {
+        flag_bjd = false;
+        if(flagjiajia)//承上启下作用标志
+        {
+             ka_muchanliang--;
+             kaku_muchanliang = ka_muchanliang;
+            flagjiajia = false;
+        }
+        else
+        {
+            kaku_muchanliang--;
+        }
+
+
+        ui->label_4->setText(QString::number(kaku_muchanliang,10));
+
+        //qDebug()<<"flag_tlgt--"<<kaku_tlgt<<endl;
+    }
+}
+
+void Setup::on_pushButton_10_clicked()//亩产量 +
+{
+    if(startflag==0)
+    {
+
+        flag_bjd = false;
+        muchanliang++;
+        ui->label_4->setText(QString::number(muchanliang,10));
+        kaku_muchanliang = muchanliang;
+        startflag = 1;
+    }
+    else
+    {
+        flag_bjd = false;
+        if(flagjiajia)//承上启下作用标志
+        {
+             ka_muchanliang++;
+             kaku_muchanliang = ka_muchanliang;
+            flagjiajia = false;
+        }
+        else
+        {
+            kaku_muchanliang++;
+        }
+
+
+        ui->label_4->setText(QString::number(kaku_muchanliang,10));
+
+        //qDebug()<<"flag_tlgt--"<<kaku_tlgt<<endl;
+    }
+}
+
+void Setup::on_pushButton_11_clicked()//割台宽度 -
+{
+    if(startflag==0)
+    {
+
+        flag_bjd = false;
+        getaikuandu--;
+        ui->label_5->setText(QString::number(getaikuandu,10));
+        kaku_getaikuandu = getaikuandu;
+        startflag = 1;
+    }
+    else
+    {
+        flag_bjd = false;
+        if(flagjiajia)//承上启下作用标志
+        {
+             ka_getaikuandu--;
+             kaku_getaikuandu = ka_getaikuandu;
+            flagjiajia = false;
+        }
+        else
+        {
+            kaku_getaikuandu--;
+        }
+
+
+        ui->label_5->setText(QString::number(kaku_getaikuandu,10));
+
+        //qDebug()<<"flag_tlgt--"<<kaku_tlgt<<endl;
+    }
+}
+
+void Setup::on_pushButton_12_clicked()//割台宽度 +
+{
+    if(startflag==0)
+    {
+
+        flag_bjd = false;
+        getaikuandu++;
+        ui->label_5->setText(QString::number(getaikuandu,10));
+        kaku_getaikuandu = getaikuandu;
+        startflag = 1;
+    }
+    else
+    {
+        flag_bjd = false;
+        if(flagjiajia)//承上启下作用标志
+        {
+             ka_getaikuandu++;
+             kaku_getaikuandu = ka_getaikuandu;
+            flagjiajia = false;
+        }
+        else
+        {
+            kaku_getaikuandu++;
+        }
+
+
+        ui->label_5->setText(QString::number(kaku_getaikuandu,10));
+
+        //qDebug()<<"flag_tlgt--"<<kaku_tlgt<<endl;
+    }
+}
+
+
 void Setup::on_pushButton_2_clicked()//时间设置
 {
     timesetobj.show();
 }
+
+

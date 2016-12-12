@@ -352,6 +352,13 @@ if(1)
     paintShanshuo_W.drawPixmap(959,31,34,35,pixShanshuo_W);
 }
 
+//测试 ，洒粮损失率
+if(1)
+{
+    pixShanshuo_W.load("./img/saliang/01.png");
+    paintShanshuo_W.drawPixmap(64,168,156,27,pixShanshuo_W);
+}
+
 /*************************************************************************************/
 //水温格数
 
