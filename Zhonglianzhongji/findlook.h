@@ -17,11 +17,13 @@ public:
     
 private:
     Ui::Findlook *ui;
+     QTimer *timergzm;
 
 protected:
     void paintEvent(QPaintEvent *);
 private slots:
     void on_pushButton_clicked();
+    void gzmslottest();
 };
 
 #endif // FINDLOOK_H

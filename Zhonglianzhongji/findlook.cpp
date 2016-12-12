@@ -10,7 +10,8 @@
 
 //RAM_CAN_sData canfindlook;
 
-
+uint spn[4]= {77,88,99,10};
+uint fmi[4]= {11,22,33,55};
 
 Findlook::Findlook(QWidget *parent) :
     QDialog(parent),
@@ -22,9 +23,11 @@ Findlook::Findlook(QWidget *parent) :
     setWindowFlags(windowFlags()|Qt::FramelessWindowHint|Qt::WindowTitleHint); //删除 最小化、最大化、关闭按钮
 
      QTimer *timerFindlook = new QTimer(this);   //声明一个定时器
+     timergzm = new QTimer();//故障码
     connect(timerFindlook, SIGNAL(timeout()), this, SLOT(update()));  //连接信号槽，定时器超时触发窗体更新
+     connect(timergzm, SIGNAL(timeout()), this, SLOT(gzmslottest()));  //连接信号槽，定时器超时触发窗体更新
     timerFindlook->start(500);
-
+    timergzm->start(1000);
      //Can_Ram_init();
 
 }
@@ -175,4 +178,31 @@ void Findlook::paintEvent(QPaintEvent *)
 void Findlook::on_pushButton_clicked()//关闭查询
 {
     this->close();
+}
+int j;
+int i = 0;
+void Findlook::gzmslottest()//故障码显示
+{
+    if(i<4)//是否有数据 0和1  1表示有数据
+    {
+
+        //for(int i = 0; i < 4; i++)
+        {
+            ui->label->setText(QString::number(fmi[i]));//FMI
+            ui->label_2->setText(QString::number(spn[i]));//SPN
+
+            qDebug()<<"spn_can.fim[i]"<<fmi[i];
+            qDebug()<<"spn_can.spn[i]"<<spn[i];
+            qDebug()<<"j == "<<j++<<endl;
+        }
+        i++;
+
+    }
+    else
+    {
+         qDebug()<<"else else else  ..."<<endl;
+        //ui->label->setText(QString::number(0));//FMI
+        //ui->label_2->setText(QString::number(0));//SPN
+        i = 0;
+    }
 }

@@ -38,10 +38,10 @@
   <widget class="QPushButton" name="pushButton_2">
    <property name="geometry">
     <rect>
-     <x>299</x>
-     <y>150</y>
-     <width>52</width>
-     <height>52</height>
+     <x>293</x>
+     <y>142</y>
+     <width>39</width>
+     <height>39</height>
     </rect>
    </property>
    <property name="focusPolicy">
@@ -205,6 +205,84 @@
    </property>
    <property name="text">
     <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_9">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>358</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>-</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_10">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>358</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>+</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_11">
+   <property name="geometry">
+    <rect>
+     <x>313</x>
+     <y>454</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>-</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_12">
+   <property name="geometry">
+    <rect>
+     <x>422</x>
+     <y>454</y>
+     <width>28</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>+</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>267</x>
+     <y>354</y>
+     <width>66</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>123</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>450</y>
+     <width>66</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>456</string>
    </property>
   </widget>
  </widget>
