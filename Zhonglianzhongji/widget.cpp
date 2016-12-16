@@ -7,6 +7,14 @@
 #include<QtSql>
 #include<QTextCodec>
 #include<QMouseEvent>
+
+#include<QEvent>
+#include<QMessageBox>
+uchar flageventpress;
+uchar flageventrelease;
+uchar flageeventcount;
+
+
 //#include"hwlib/libshm.h"
 /********************************************************************************************************************/
 //定义时间变量用于各界面传递
@@ -76,17 +84,22 @@ Widget::Widget(QWidget *parent) :
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
-
     resize(1024,600);
+
+    ui->pushButton_4->installEventFilter(this); //even ;
 
     //解析现象，当去掉 setWindowFlags(windowFlags()|Qt::FramelessWindowHint|Qt::WindowTitleHint); 这一句，在开发板子上能显示上方图标，但是不闪烁，
     //不注释则可以在板子上闪烁。
-    setWindowFlags(windowFlags()|Qt::FramelessWindowHint|Qt::WindowTitleHint); //删除 最小化、最大化、关闭按钮
+    //setWindowFlags(windowFlags()|Qt::FramelessWindowHint|Qt::WindowTitleHint); //删除 最小化、最大化、关闭按钮
 
     QTimer *timer = new QTimer(this);   //声明一个定时器
     timer_xiaoshiji = new QTimer(); //声明小时计定时器
     timer_shanhua = new QTimer();//闪烁
     timer_Licheng = new QTimer();//里程
+
+    timer_eventmouse = new QTimer();// event
+    connect(timer_eventmouse,SIGNAL(timeout()),this,SLOT(slotmouse()));//event
+
 
     connect(timer_Licheng,SIGNAL(timeout()),this,SLOT(Licheng()));//里程
     connect(timer_xiaoshiji,SIGNAL(timeout()),this,SLOT(xiaoshiji()));//小时计
@@ -98,6 +111,8 @@ Widget::Widget(QWidget *parent) :
     timer->start(30);   //启动定时器
     timer_xiaoshiji->start(1000);
     timer_Licheng->start(1000);
+    timer_eventmouse->start(1000);
+
     timer_shanhua->start(30);
 
     //Can_Ram_init();
@@ -697,7 +712,7 @@ void Widget::Licheng()//里程
     {
         clearSave = 1;
     }
-    qDebug()<<"MIJILICHENG[2];clearflag ----- = "<<clearflag<<endl;
+   // qDebug()<<"MIJILICHENG[2];clearflag ----- = "<<clearflag<<endl;
 
     if(clearflag)
     {
@@ -986,11 +1001,12 @@ void Widget::on_pushButton_3_clicked()//蜂鸣器
 
 void Widget::on_pushButton_4_clicked()//米计清零
 {
+#if 0
     mijisum = 0;
     //clearflag = 0;
     clearflag ^= 1;
     clearSave = clearflag;
-    qDebug()<<"clearflag ----- = "<<clearflag<<endl;
+    //qDebug()<<"clearflag ----- = "<<clearflag<<endl;
     //ui->label->setText("007");
 
     if (clearflag)// flagbeep = 0； 喇叭未摁下
@@ -1001,4 +1017,58 @@ void Widget::on_pushButton_4_clicked()//米计清零
     {
         ui->pushButton_4->setStyleSheet("QPushButton{border-image:url(./img/mijibai.png);background-repeat: background-xy;background-position: center;background-attachment: fixed;background-clip: padding}");
     }
+#endif
+
+}
+
+bool Widget::eventFilter(QObject *target, QEvent *e)
+{
+    if(target == ui->pushButton_4)
+    {
+        if(e->type() == QEvent::MouseButtonPress)
+        {
+            //QMessageBox::about(this,"x","x");
+            qDebug()<<"press mouse buuton "<<endl;
+            flageventpress  = 1;
+            flageventrelease = 0;
+            ui->pushButton_4->setStyleSheet("QPushButton{border-image:url(./img/mijibai.png);background-repeat: background-xy;background-position: center;background-attachment: fixed;background-clip: padding}");
+
+        }
+        else if(e->type() == QEvent::MouseButtonRelease)
+        {
+            //QMessageBox::about(this,"y","y");
+              qDebug()<<"release] mouse buuton "<<endl;
+              flageventrelease = 1;
+
+               flageventpress  = 0;
+        }
+    }
+    return QWidget::eventFilter(target, e);
+}
+
+void Widget::slotmouse()
+{
+        if(flageventpress == 1)
+        {
+                flageeventcount++;
+                if(flageeventcount == 4)
+                {
+                      qDebug()<<"zero zero .......     "<<endl;
+                      flageeventcount = 0;
+
+                      clearflag ^= 1;
+                      clearSave = clearflag;
+
+
+                }
+        }
+        if (flageventrelease == 1)
+        {
+            qDebug()<<"ll ldldld lllllll   .......     "<<endl;
+            flageeventcount = 0;
+            ui->pushButton_4->setStyleSheet("QPushButton{border-image:url(./img/miji.png);background-repeat: background-xy;background-position: center;background-attachment: fixed;background-clip: padding}");
+
+
+        }
+
 }

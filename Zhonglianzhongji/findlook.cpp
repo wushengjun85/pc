@@ -191,16 +191,16 @@ void Findlook::gzmslottest()//故障码显示
             ui->label->setText(QString::number(fmi[i]));//FMI
             ui->label_2->setText(QString::number(spn[i]));//SPN
 
-            qDebug()<<"spn_can.fim[i]"<<fmi[i];
-            qDebug()<<"spn_can.spn[i]"<<spn[i];
-            qDebug()<<"j == "<<j++<<endl;
+//            qDebug()<<"spn_can.fim[i]"<<fmi[i];
+//            qDebug()<<"spn_can.spn[i]"<<spn[i];
+//            qDebug()<<"j == "<<j++<<endl;
         }
         i++;
 
     }
     else
     {
-         qDebug()<<"else else else  ..."<<endl;
+         //qDebug()<<"else else else  ..."<<endl;
         //ui->label->setText(QString::number(0));//FMI
         //ui->label_2->setText(QString::number(0));//SPN
         i = 0;
