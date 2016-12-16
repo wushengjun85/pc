@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'widget.h'
 **
-** Created: Tue Dec 6 09:10:33 2016
+** Created: Fri Dec 16 15:42:26 2016
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_Widget[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -37,7 +37,8 @@ static const uint qt_meta_data_Widget[] = {
       70,    7,    7,    7, 0x08,
       80,    7,    7,    7, 0x08,
       90,    7,    7,    7, 0x08,
-     116,    7,    7,    7, 0x08,
+     102,    7,    7,    7, 0x08,
+     128,    7,    7,    7, 0x08,
 
        0        // eod
 };
@@ -45,7 +46,8 @@ static const uint qt_meta_data_Widget[] = {
 static const char qt_meta_stringdata_Widget[] = {
     "Widget\0\0on_pushButton_clicked()\0"
     "on_pushButton_2_clicked()\0xiaoshiji()\0"
-    "shanhua()\0Licheng()\0on_pushButton_3_clicked()\0"
+    "shanhua()\0Licheng()\0slotmouse()\0"
+    "on_pushButton_3_clicked()\0"
     "on_pushButton_4_clicked()\0"
 };
 
@@ -60,8 +62,9 @@ void Widget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 2: _t->xiaoshiji(); break;
         case 3: _t->shanhua(); break;
         case 4: _t->Licheng(); break;
-        case 5: _t->on_pushButton_3_clicked(); break;
-        case 6: _t->on_pushButton_4_clicked(); break;
+        case 5: _t->slotmouse(); break;
+        case 6: _t->on_pushButton_3_clicked(); break;
+        case 7: _t->on_pushButton_4_clicked(); break;
         default: ;
         }
     }
@@ -100,9 +103,9 @@ int Widget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 8;
     }
     return _id;
 }

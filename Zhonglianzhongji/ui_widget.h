@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'widget.ui'
 **
-** Created: Tue Dec 6 09:10:27 2016
+** Created: Fri Dec 16 15:46:57 2016
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -40,6 +40,7 @@ public:
     QLabel *label_11;
     QLabel *label_12;
     QPushButton *pushButton_4;
+    QLabel *label_13;
 
     void setupUi(QWidget *Widget)
     {
@@ -90,10 +91,10 @@ public:
         label_4->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
         label_5 = new QLabel(Widget);
         label_5->setObjectName(QString::fromUtf8("label_5"));
-        label_5->setGeometry(QRect(87, 162, 91, 41));
+        label_5->setGeometry(QRect(67, 162, 151, 41));
         label_5->setStyleSheet(QString::fromUtf8("font: 75 italic 26pt \"Ubuntu\";\n"
 "color: rgb(0, 0, 0);"));
-        label_5->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        label_5->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
         label_6 = new QLabel(Widget);
         label_6->setObjectName(QString::fromUtf8("label_6"));
         label_6->setGeometry(QRect(87, 240, 91, 41));
@@ -141,8 +142,14 @@ public:
         label_12->setAlignment(Qt::AlignCenter);
         pushButton_4 = new QPushButton(Widget);
         pushButton_4->setObjectName(QString::fromUtf8("pushButton_4"));
-        pushButton_4->setGeometry(QRect(440, 397, 42, 20));
-        pushButton_4->setStyleSheet(QString::fromUtf8("border-image: url(:/new/prefix1/img/miji.png);"));
+        pushButton_4->setGeometry(QRect(467, 439, 92, 40));
+        pushButton_4->setStyleSheet(QString::fromUtf8("border-image: url(:/new/prefix1/img/qinglingbai.png);"));
+        label_13 = new QLabel(Widget);
+        label_13->setObjectName(QString::fromUtf8("label_13"));
+        label_13->setGeometry(QRect(500, 27, 59, 28));
+        label_13->setStyleSheet(QString::fromUtf8("font: 75 italic 26pt \"Ubuntu\";\n"
+"color: rgb(255, 255, 255);"));
+        label_13->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
         retranslateUi(Widget);
 
@@ -168,6 +175,7 @@ public:
         label_11->setText(QApplication::translate("Widget", "TextLabel", 0, QApplication::UnicodeUTF8));
         label_12->setText(QApplication::translate("Widget", "TextLabel", 0, QApplication::UnicodeUTF8));
         pushButton_4->setText(QString());
+        label_13->setText(QApplication::translate("Widget", "789", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

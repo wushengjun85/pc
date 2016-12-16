@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'setup.ui'
 **
-** Created: Tue Dec 6 09:10:27 2016
+** Created: Fri Dec 16 15:42:18 2016
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -35,6 +35,12 @@ public:
     QLabel *label;
     QLabel *label_2;
     QLabel *label_3;
+    QPushButton *pushButton_9;
+    QPushButton *pushButton_10;
+    QPushButton *pushButton_11;
+    QPushButton *pushButton_12;
+    QLabel *label_4;
+    QLabel *label_5;
 
     void setupUi(QDialog *Setup)
     {
@@ -49,7 +55,7 @@ public:
         pushButton->setStyleSheet(QString::fromUtf8("border-image: url(:/new/prefix1/img/a4.png);"));
         pushButton_2 = new QPushButton(Setup);
         pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
-        pushButton_2->setGeometry(QRect(299, 150, 52, 52));
+        pushButton_2->setGeometry(QRect(293, 142, 39, 39));
         pushButton_2->setFocusPolicy(Qt::NoFocus);
         pushButton_2->setStyleSheet(QString::fromUtf8("border-image: url(:/new/prefix1/img/timeicon.png);"));
         pushButton_3 = new QPushButton(Setup);
@@ -91,6 +97,32 @@ public:
         label_3 = new QLabel(Setup);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setGeometry(QRect(590, 440, 66, 41));
+        pushButton_9 = new QPushButton(Setup);
+        pushButton_9->setObjectName(QString::fromUtf8("pushButton_9"));
+        pushButton_9->setGeometry(QRect(230, 358, 28, 28));
+        pushButton_9->setFocusPolicy(Qt::NoFocus);
+        pushButton_9->setAutoRepeat(true);
+        pushButton_10 = new QPushButton(Setup);
+        pushButton_10->setObjectName(QString::fromUtf8("pushButton_10"));
+        pushButton_10->setGeometry(QRect(340, 358, 28, 28));
+        pushButton_10->setFocusPolicy(Qt::NoFocus);
+        pushButton_10->setAutoRepeat(true);
+        pushButton_11 = new QPushButton(Setup);
+        pushButton_11->setObjectName(QString::fromUtf8("pushButton_11"));
+        pushButton_11->setGeometry(QRect(313, 454, 28, 28));
+        pushButton_11->setFocusPolicy(Qt::NoFocus);
+        pushButton_11->setAutoRepeat(true);
+        pushButton_12 = new QPushButton(Setup);
+        pushButton_12->setObjectName(QString::fromUtf8("pushButton_12"));
+        pushButton_12->setGeometry(QRect(422, 454, 28, 28));
+        pushButton_12->setFocusPolicy(Qt::NoFocus);
+        pushButton_12->setAutoRepeat(true);
+        label_4 = new QLabel(Setup);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setGeometry(QRect(267, 354, 66, 41));
+        label_5 = new QLabel(Setup);
+        label_5->setObjectName(QString::fromUtf8("label_5"));
+        label_5->setGeometry(QRect(350, 450, 66, 41));
 
         retranslateUi(Setup);
 
@@ -111,6 +143,12 @@ public:
         label->setText(QApplication::translate("Setup", "TextLabel", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("Setup", "TextLabel", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("Setup", "TextLabel", 0, QApplication::UnicodeUTF8));
+        pushButton_9->setText(QApplication::translate("Setup", "-", 0, QApplication::UnicodeUTF8));
+        pushButton_10->setText(QApplication::translate("Setup", "+", 0, QApplication::UnicodeUTF8));
+        pushButton_11->setText(QApplication::translate("Setup", "-", 0, QApplication::UnicodeUTF8));
+        pushButton_12->setText(QApplication::translate("Setup", "+", 0, QApplication::UnicodeUTF8));
+        label_4->setText(QApplication::translate("Setup", "123", 0, QApplication::UnicodeUTF8));
+        label_5->setText(QApplication::translate("Setup", "456", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

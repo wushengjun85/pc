@@ -1031,7 +1031,7 @@ bool Widget::eventFilter(QObject *target, QEvent *e)
             qDebug()<<"press mouse buuton "<<endl;
             flageventpress  = 1;
             flageventrelease = 0;
-            ui->pushButton_4->setStyleSheet("QPushButton{border-image:url(./img/mijibai.png);background-repeat: background-xy;background-position: center;background-attachment: fixed;background-clip: padding}");
+            ui->pushButton_4->setStyleSheet("QPushButton{border-image:url(./img/qingling.png);background-repeat: background-xy;background-position: center;background-attachment: fixed;background-clip: padding}");
 
         }
         else if(e->type() == QEvent::MouseButtonRelease)
@@ -1066,7 +1066,7 @@ void Widget::slotmouse()
         {
             qDebug()<<"ll ldldld lllllll   .......     "<<endl;
             flageeventcount = 0;
-            ui->pushButton_4->setStyleSheet("QPushButton{border-image:url(./img/miji.png);background-repeat: background-xy;background-position: center;background-attachment: fixed;background-clip: padding}");
+            ui->pushButton_4->setStyleSheet("QPushButton{border-image:url(./img/qinglingbai.png);background-repeat: background-xy;background-position: center;background-attachment: fixed;background-clip: padding}");
 
 
         }
