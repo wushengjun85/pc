@@ -23,6 +23,13 @@ uchar LCMachineModeMenu = 0;
 uchar LCEngineSwitchMenu = 0;
 bool LCBoolMachineModenu = true;
 
+//2017.5.4  割台设置
+uchar LCGetaiSetup = 0;
+uchar GeFuWidth = 0;
+uchar Zaihexishu = 0;
+uchar Autospeed = 0;
+//
+
 uchar LCZhujiFault = 0;
 uchar LCEngineFault = 0;
 
@@ -412,6 +419,12 @@ Widget::Widget(QWidget *parent) :
     ui->lineEdit_9->installEventFilter(this);
     ui->lineEdit_10->installEventFilter(this);
 
+    //2017.5.4
+    ui->lineEdit_12->installEventFilter(this);
+    ui->lineEdit_13->installEventFilter(this);
+    ui->lineEdit_14->installEventFilter(this);
+    ui->lineEdit_15->installEventFilter(this);
+
 
     //2017.4.22    //读取阀值设定数据库
     #if 1
@@ -521,6 +534,8 @@ Widget::Widget(QWidget *parent) :
     ui->lineEdit_8->setText(strjlzs);
     ui->lineEdit_9->setText(strgqzs);
 
+
+
     /**************************************************************/
 
     //2017.4.7
@@ -564,6 +579,11 @@ Widget::Widget(QWidget *parent) :
     ui->listWidget_3->installEventFilter(this);
     ui->listWidget_4->installEventFilter(this);
     ui->listWidget_5->installEventFilter(this);
+
+    //2017.5.4
+    ui->listWidget_7->installEventFilter(this);
+    //
+
 
     ui->tableWidget->installEventFilter(this);
     ui->tableWidget_2->installEventFilter(this);
@@ -4038,11 +4058,14 @@ void Widget::keyPressEvent(QKeyEvent *e)
                 ui->stackedWidget->setCurrentIndex(12);
             }
             //2017.5.4
-            else if(LCBiaoDingRow == 3) //阀值标定
+            else if(LCBiaoDingRow == 3) //割台设定
             {
                 qDebug()<<"GETATI)))))))))))))))))))))))))))))))))))))))))))))))";
                 flagwidget = Getai;
                 ui->stackedWidget->setCurrentIndex(18);
+
+                //2017.5.4
+                ui->listWidget_7->setFocus();
             }
           break;
 
@@ -5123,6 +5146,250 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
             }
         }
     }//end of else if(watched == ui->listWidget_6)
+
+    //2017.5.4
+    //割台参数设置
+    else if((watched == ui->listWidget_7)||(watched == ui->lineEdit_12)||(watched == ui->lineEdit_13)||(watched == ui->lineEdit_14)||(watched == ui->lineEdit_15))
+    {
+        if(event->type() == QEvent::KeyPress)
+        {
+            QKeyEvent *key_event = static_cast < QKeyEvent *>(event); //将事件转化为键盘事件
+            {
+                if(key_event->key() == Qt::Key_F2)//下键
+                {
+
+//                    bool GetaiFocus1 = ui->listWidget_7->hasFocus();
+//                    bool GetaiFocus2 = ui->lineEdit_12->hasFocus();
+//                    bool GetaiFocus3 = ui->lineEdit_13->hasFocus();
+//                    bool GetaiFocus4 = ui->lineEdit_14->hasFocus();
+//                    bool GetaiFocus5 = ui->lineEdit_15->hasFocus();
+
+                    if(LCGetaiSetup>7)
+                    {
+
+                        //LCGetaiSetup = 0;
+                        ui->listWidget_7->item(7)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_7->item(7)->setTextColor(Qt::black);
+
+                       if(LCGetaiSetup == 8)
+                       {
+                           ui->lineEdit_12->setFocus();
+                           //focusNextChild();
+                           ui->lineEdit_12->hasFocus();
+                       }
+                       else if(LCGetaiSetup == 9)
+                       {
+                           ui->lineEdit_13->setFocus();
+                           //focusNextChild();
+                           ui->lineEdit_13->hasFocus();
+                       }
+                       else if(LCGetaiSetup == 10)
+                       {
+                           ui->lineEdit_14->setFocus();
+                           //focusNextChild();
+                           ui->lineEdit_14->hasFocus();
+                       }
+                       else if(LCGetaiSetup == 11)
+                       {
+                           ui->lineEdit_15->setFocus();
+
+                           ui->lineEdit_15->hasFocus();
+                           //focusNextChild();
+                           //LCGetaiSetup = 0;
+                          // ui->listWidget_7->setFocus();
+
+                       }
+                       else if(LCGetaiSetup == 12)
+                       {
+                           LCGetaiSetup = 0;
+                       }
+
+                    }
+
+                    if(LCGetaiSetup<=7)
+                    {
+                        ui->listWidget_7->item(LCGetaiSetup)->setBackgroundColor(Qt::yellow);
+                        ui->listWidget_7->item(LCGetaiSetup)->setTextColor(Qt::red);
+                    }
+
+                    if(LCGetaiSetup == 1)
+                    {
+                        ui->listWidget_7->item(0)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_7->item(0)->setTextColor(Qt::black);
+                    }
+                    if(LCGetaiSetup == 2)
+                    {
+                        ui->listWidget_7->item(0)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_7->item(0)->setTextColor(Qt::black);
+                        ui->listWidget_7->item(1)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_7->item(1)->setTextColor(Qt::black);
+                    }
+                    if(LCGetaiSetup == 3)
+                    {
+                        ui->listWidget_7->item(0)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_7->item(0)->setTextColor(Qt::black);
+                        ui->listWidget_7->item(1)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_7->item(1)->setTextColor(Qt::black);
+                        ui->listWidget_7->item(2)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_7->item(2)->setTextColor(Qt::black);
+                    }
+
+                    if(LCGetaiSetup == 4)
+                    {
+                        ui->listWidget_7->item(0)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_7->item(0)->setTextColor(Qt::black);
+                        ui->listWidget_7->item(1)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_7->item(1)->setTextColor(Qt::black);
+                        ui->listWidget_7->item(2)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_7->item(2)->setTextColor(Qt::black);
+                        ui->listWidget_7->item(3)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_7->item(3)->setTextColor(Qt::black);
+                    }
+                    if(LCGetaiSetup == 5)
+                    {
+                        ui->listWidget_7->item(0)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_7->item(0)->setTextColor(Qt::black);
+                        ui->listWidget_7->item(1)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_7->item(1)->setTextColor(Qt::black);
+                        ui->listWidget_7->item(2)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_7->item(2)->setTextColor(Qt::black);
+                        ui->listWidget_7->item(3)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_7->item(3)->setTextColor(Qt::black);
+                        ui->listWidget_7->item(4)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_7->item(4)->setTextColor(Qt::black);
+                    }
+                    if(LCGetaiSetup == 6)
+                    {
+                        ui->listWidget_7->item(0)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_7->item(0)->setTextColor(Qt::black);
+                        ui->listWidget_7->item(1)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_7->item(1)->setTextColor(Qt::black);
+                        ui->listWidget_7->item(2)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_7->item(2)->setTextColor(Qt::black);
+                        ui->listWidget_7->item(3)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_7->item(3)->setTextColor(Qt::black);
+                        ui->listWidget_7->item(4)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_7->item(4)->setTextColor(Qt::black);
+                        ui->listWidget_7->item(5)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_7->item(5)->setTextColor(Qt::black);
+
+                    }
+                    if(LCGetaiSetup == 7)
+                    {
+                        ui->listWidget_7->item(0)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_7->item(0)->setTextColor(Qt::black);
+                        ui->listWidget_7->item(1)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_7->item(1)->setTextColor(Qt::black);
+                        ui->listWidget_7->item(2)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_7->item(2)->setTextColor(Qt::black);
+                        ui->listWidget_7->item(3)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_7->item(3)->setTextColor(Qt::black);
+                        ui->listWidget_7->item(4)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_7->item(4)->setTextColor(Qt::black);
+                        ui->listWidget_7->item(5)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_7->item(5)->setTextColor(Qt::black);
+                        ui->listWidget_7->item(6)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_7->item(6)->setTextColor(Qt::black);
+                    }
+
+                    flagaction = true;
+                    LCGetaiSetup++;
+                }
+
+                //2017.5.4
+                else if (key_event->key() == Qt::Key_F3)
+                {
+                    if(LCGetaiSetup == 9)
+                    {
+                        GeFuWidth--;
+                        QString strGeFuWidth = QString("%1").arg(GeFuWidth);
+                        ui->lineEdit_12->setText(strGeFuWidth);
+                    }
+                    if(LCGetaiSetup == 10)
+                    {
+                         Zaihexishu--;
+                        QString strZaihexishu = QString("%1").arg(Zaihexishu);
+                        ui->lineEdit_13->setText(strZaihexishu);
+                    }
+                    if(LCGetaiSetup == 11)
+                    {
+                        Autospeed--;
+                        QString strAutospeed = QString("%1").arg(Autospeed);
+                        ui->lineEdit_14->setText(strAutospeed);
+                    }
+                    flagaction = true;
+                }
+                else if (key_event->key() == Qt::Key_F4)
+                {
+                    if(LCGetaiSetup == 9)
+                    {
+                        GeFuWidth++;
+                        QString strGeFuWidth = QString("%1").arg(GeFuWidth);
+                        ui->lineEdit_12->setText(strGeFuWidth);
+                    }
+                    if(LCGetaiSetup == 10)
+                    {
+                         Zaihexishu++;
+                        QString strZaihexishu = QString("%1").arg(Zaihexishu);
+                        ui->lineEdit_13->setText(strZaihexishu);
+                    }
+                    if(LCGetaiSetup == 11)
+                    {
+                        Autospeed++;
+                        QString strAutospeed = QString("%1").arg(Autospeed);
+                        ui->lineEdit_14->setText(strAutospeed);
+                    }
+                    flagaction = true;
+                }
+
+            }
+        }
+    }//end of else if(watched == ui->listWidget_7)
+
+//    else if(watched == ui->lineEdit_12)
+//    {
+//        if(event->type() == QEvent::KeyPress)
+//        {
+//            QKeyEvent *key_event = static_cast < QKeyEvent *>(event); //将事件转化为键盘事件
+//            {
+//                if(key_event->key() == Qt::Key_F2)//下键
+//                {
+//                    if(LCGetaiSetup == 8)
+//                    {
+//                        qDebug()<<" kdjsksksksksksssssssssssssssssssssssssssssssssssssss == "<<LCGetaiSetup<<endl;
+
+//                        focusNextChild();
+//                        ui->lineEdit_12->hasFocus();
+//                    }
+//                }
+//                flagaction = true;
+//                LCGetaiSetup++;
+//            }
+//        }
+//    }
+//    else if(watched == ui->lineEdit_13)
+//    {
+//        if(event->type() == QEvent::KeyPress)
+//        {
+//            QKeyEvent *key_event = static_cast < QKeyEvent *>(event); //将事件转化为键盘事件
+//            {
+//                if(key_event->key() == Qt::Key_F2)//下键
+//                {
+//                    if(LCGetaiSetup == 9)
+//                    {
+//                        qDebug()<<" kdjsksksksksksssssssssssssssssssssssssssssssssssssss == "<<LCGetaiSetup<<endl;
+
+//                        focusNextChild();
+//                        ui->lineEdit_13->hasFocus();
+//                    }
+//                }
+//                flagaction = true;
+//                LCGetaiSetup++;
+//            }
+//        }
+//    }
+
+
 
     //匹配性标定
 
