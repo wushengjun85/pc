@@ -4228,7 +4228,6 @@ void Widget::keyPressEvent(QKeyEvent *e)
               tempjlzs = query.value(5).toInt();
               tempgqzs = query.value(6).toInt();
 
-
             }
             #endif
             query.exec(QObject::tr("drop FaZhiBingBD"));
@@ -4250,13 +4249,62 @@ void Widget::keyPressEvent(QKeyEvent *e)
 
 /**************************************************************************************************/
 
+                case Getai:
+                {
+                //2017.5.5 割台参数设置
+                #if 1
+                QTextCodec::setCodecForTr(QTextCodec::codecForLocale());//汉字显示
+                QSqlDatabase db;
+                if(QSqlDatabase::contains("qt_sql_default_connection"))
+                  db = QSqlDatabase::database("qt_sql_default_connection");
+                else
+                  db = QSqlDatabase::addDatabase("QSQLITE");
+
+               db.setDatabaseName("jy.db");
+               if (!db.open())
+               {
+                   qDebug()<<"open database failed ---"<<db.lastError().text()<<endl;
+               }
+               QSqlQuery query;
+               #if 0
+               bool ok = query.exec("create table GeTaiBD(GuWuSwitch INTEGER,GeFuWidth INTEGER,ZaiHeXishu INTEGER,ChangeSpeed INTEGER)");
+               if (ok)
+               {
+                   qDebug()<<"ceate table partition success"<<endl;
+               }
+               else
+               {
+                   qDebug()<<"ceate table partition failed"<<endl;
+               }
+               #endif
+
+               //query.prepare("INSERT INTO GeTaiBD(GuWuSwitch, GeFuWidth, ZaiHeXishu,ChangeSpeed) VALUES (:GuWuSwitch, :GeFuWidth,:ZaiHeXishu, :ChangeSpeed)");
+               query.prepare("update GeTaiBD set GuWuSwitch = :GuWuSwitch,GeFuWidth = :GeFuWidth,ZaiHeXishu = :ZaiHeXishu,ChangeSpeed = :ChangeSpeed");//where
+
+               query.bindValue(":GuWuSwitch",3000);
+               query.bindValue(":GeFuWidth", 11);
+               query.bindValue(":ZaiHeXishu", 66);
+               query.bindValue(":ChangeSpeed", 77);
+               query.exec();
+
+             query.exec("select GuWuSwitch, GeFuWidth, ZaiHeXishu,ChangeSpeed from GeTaiBD");
+             while (query.next())
+             {
+
+                qDebug()<<"id("<<query.value(0).toInt()<<")  name:"<<query.value(1).toString()<<"  age:"<<query.value(2).toInt();
+
+             }
+              query.exec(QObject::tr("drop GuWuSwitch"));
+
+          #endif
+              }
+              break;
+/**************************************************************************************************/
             //2017.4.10
             case HelpMenu:
             flagwidget = JiQiXinXi;
             ui->stackedWidget->setCurrentIndex(15);
             break;
-
-
 
             default:
             break;
@@ -4447,7 +4495,6 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                     flagaction = true;
                     return true;
                 }
-
             }
         }
     } //clearmenu F2键过滤
@@ -4476,7 +4523,6 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                     }
                     else if(LCClearMenuRow == 2)
                     {
-
                         ui->listWidget->item(1)->setBackgroundColor(Qt::transparent);
                         ui->listWidget->item(1)->setTextColor(Qt::black);
                         ui->listWidget->item(0)->setBackgroundColor(Qt::transparent);
@@ -4485,7 +4531,6 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
 
                     flagaction = true;
                     LCClearMenuRow++;
-
                 }
 
             }
@@ -4757,7 +4802,6 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
             {
                 if(key_event->key() == Qt::Key_F2)//下键
                 {
-
                     if(LCZhujiFault>=10)
                     {
                         LCZhujiFault = 0;
@@ -4985,7 +5029,6 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                         ui->lineEdit_9->setText(strgqzs);
                     }
 
-
                     flagaction = true;
                     return true;
                 }
@@ -5157,53 +5200,35 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
             {
                 if(key_event->key() == Qt::Key_F2)//下键
                 {
-
-//                    bool GetaiFocus1 = ui->listWidget_7->hasFocus();
-//                    bool GetaiFocus2 = ui->lineEdit_12->hasFocus();
-//                    bool GetaiFocus3 = ui->lineEdit_13->hasFocus();
-//                    bool GetaiFocus4 = ui->lineEdit_14->hasFocus();
-//                    bool GetaiFocus5 = ui->lineEdit_15->hasFocus();
-
                     if(LCGetaiSetup>7)
                     {
-
-                        //LCGetaiSetup = 0;
                         ui->listWidget_7->item(7)->setBackgroundColor(Qt::transparent);
                         ui->listWidget_7->item(7)->setTextColor(Qt::black);
 
                        if(LCGetaiSetup == 8)
                        {
                            ui->lineEdit_12->setFocus();
-                           //focusNextChild();
                            ui->lineEdit_12->hasFocus();
                        }
                        else if(LCGetaiSetup == 9)
                        {
                            ui->lineEdit_13->setFocus();
-                           //focusNextChild();
                            ui->lineEdit_13->hasFocus();
                        }
                        else if(LCGetaiSetup == 10)
                        {
                            ui->lineEdit_14->setFocus();
-                           //focusNextChild();
                            ui->lineEdit_14->hasFocus();
                        }
                        else if(LCGetaiSetup == 11)
                        {
                            ui->lineEdit_15->setFocus();
-
                            ui->lineEdit_15->hasFocus();
-                           //focusNextChild();
-                           //LCGetaiSetup = 0;
-                          // ui->listWidget_7->setFocus();
-
                        }
                        else if(LCGetaiSetup == 12)
                        {
                            LCGetaiSetup = 0;
                        }
-
                     }
 
                     if(LCGetaiSetup<=7)
@@ -5341,58 +5366,67 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                     }
                     flagaction = true;
                 }
+                else if ((key_event->key() == Qt::Key_F5)&&(watched == ui->lineEdit_15))
+                {
+                    //2017.5.5 割台数据库添加
+                    //割台参数设置
+                  #if 1
+                        QTextCodec::setCodecForTr(QTextCodec::codecForLocale());//汉字显示
+                        QSqlDatabase db;
+                        if(QSqlDatabase::contains("qt_sql_default_connection"))
+                          db = QSqlDatabase::database("qt_sql_default_connection");
+                        else
+                          db = QSqlDatabase::addDatabase("QSQLITE");
+
+                       db.setDatabaseName("jy.db");
+                       if (!db.open())
+                       {
+                           qDebug()<<"open database failed ---"<<db.lastError().text()<<endl;
+                       }
+                       QSqlQuery query;
+                       #if 0
+                       bool ok = query.exec("create table GeTaiBD(GuWuSwitch INTEGER,GeFuWidth INTEGER,ZaiHeXishu INTEGER,ChangeSpeed INTEGER)");
+                       if (ok)
+                       {
+                           qDebug()<<"ceate table partition success"<<endl;
+                       }
+                       else
+                       {
+                           qDebug()<<"ceate table partition failed"<<endl;
+                       }
+                       #endif
+
+                       //query.prepare("INSERT INTO GeTaiBD(GuWuSwitch, GeFuWidth, ZaiHeXishu,ChangeSpeed) VALUES (:GuWuSwitch, :GeFuWidth,:ZaiHeXishu, :ChangeSpeed)");
+                       query.prepare("update GeTaiBD set GuWuSwitch = :GuWuSwitch,GeFuWidth = :GeFuWidth,ZaiHeXishu = :ZaiHeXishu,ChangeSpeed = :ChangeSpeed");//where
+
+                       query.bindValue(":GuWuSwitch",3000);
+                       query.bindValue(":GeFuWidth", 11);
+                       query.bindValue(":ZaiHeXishu", 66);
+                       query.bindValue(":ChangeSpeed", 77);
+                       query.exec();
+
+                     query.exec("select GuWuSwitch, GeFuWidth, ZaiHeXishu,ChangeSpeed from GeTaiBD");
+                     while (query.next())
+                     {
+
+                        qDebug()<<"id("<<query.value(0).toInt()<<")  name:"<<query.value(1).toString()<<"  age:"<<query.value(2).toInt();
+
+                     }
+                      query.exec(QObject::tr("drop GuWuSwitch"));
+
+                  #endif
+
+                    ui->lineEdit_12->setText("3140");
+                    ui->lineEdit_13->setText("5");
+                    ui->lineEdit_14->setText("80");
+                    flagaction = true;
+                }
 
             }
         }
     }//end of else if(watched == ui->listWidget_7)
 
-//    else if(watched == ui->lineEdit_12)
-//    {
-//        if(event->type() == QEvent::KeyPress)
-//        {
-//            QKeyEvent *key_event = static_cast < QKeyEvent *>(event); //将事件转化为键盘事件
-//            {
-//                if(key_event->key() == Qt::Key_F2)//下键
-//                {
-//                    if(LCGetaiSetup == 8)
-//                    {
-//                        qDebug()<<" kdjsksksksksksssssssssssssssssssssssssssssssssssssss == "<<LCGetaiSetup<<endl;
-
-//                        focusNextChild();
-//                        ui->lineEdit_12->hasFocus();
-//                    }
-//                }
-//                flagaction = true;
-//                LCGetaiSetup++;
-//            }
-//        }
-//    }
-//    else if(watched == ui->lineEdit_13)
-//    {
-//        if(event->type() == QEvent::KeyPress)
-//        {
-//            QKeyEvent *key_event = static_cast < QKeyEvent *>(event); //将事件转化为键盘事件
-//            {
-//                if(key_event->key() == Qt::Key_F2)//下键
-//                {
-//                    if(LCGetaiSetup == 9)
-//                    {
-//                        qDebug()<<" kdjsksksksksksssssssssssssssssssssssssssssssssssssss == "<<LCGetaiSetup<<endl;
-
-//                        focusNextChild();
-//                        ui->lineEdit_13->hasFocus();
-//                    }
-//                }
-//                flagaction = true;
-//                LCGetaiSetup++;
-//            }
-//        }
-//    }
-
-
-
     //匹配性标定
-
     else if((watched == ui->tableWidget_3)||(watched == ui->lineEdit_11))//
     {
         if(event->type() == QEvent::KeyPress)
@@ -5406,9 +5440,6 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                     bool mm2 = ui->lineEdit_11->hasFocus();
                     if(mm1)
                     {
-//                        focusNextChild();
-//                        ui->lineEdit_11->hasFocus();
-
 #if 1
                     if(LCPiPeixingBiaoDing>=6)
                     {
@@ -6296,6 +6327,55 @@ void Widget::Licheng()//语言，发动机厂家，机器型号
   query.exec(QObject::tr("drop FaZhiBingBD"));
 
   #endif
+
+
+  //割台参数设置
+#if 0
+
+      QTextCodec::setCodecForTr(QTextCodec::codecForLocale());//汉字显示
+      QSqlDatabase db;
+      if(QSqlDatabase::contains("qt_sql_default_connection"))
+        db = QSqlDatabase::database("qt_sql_default_connection");
+      else
+        db = QSqlDatabase::addDatabase("QSQLITE");
+
+     db.setDatabaseName("jy.db");
+     if (!db.open())
+     {
+         qDebug()<<"open database failed ---"<<db.lastError().text()<<endl;
+     }
+     QSqlQuery query;
+     #if 0
+     bool ok = query.exec("create table GeTaiBD(GuWuSwitch INTEGER,GeFuWidth INTEGER,ZaiHeXishu INTEGER,ChangeSpeed INTEGER)");
+     if (ok)
+     {
+         qDebug()<<"ceate table partition success"<<endl;
+     }
+     else
+     {
+         qDebug()<<"ceate table partition failed"<<endl;
+     }
+     #endif
+
+     query.prepare("INSERT INTO GeTaiBD(GuWuSwitch, GeFuWidth, ZaiHeXishu,ChangeSpeed) VALUES (:GuWuSwitch, :GeFuWidth,:ZaiHeXishu, :ChangeSpeed)");
+     //query.prepare("update GeTaiBD set GuWuSwitch = :GuWuSwitch,GeFuWidth = :GeFuWidth,ZaiHeXishu = :ZaiHeXishu,ChangeSpeed = :ChangeSpeed");//where
+
+     query.bindValue(":GuWuSwitch",3000);
+     query.bindValue(":GeFuWidth", 11);
+     query.bindValue(":ZaiHeXishu", 66);
+     query.bindValue(":ChangeSpeed", 77);
+     query.exec();
+
+   query.exec("select GuWuSwitch, GeFuWidth, ZaiHeXishu,ChangeSpeed from GeTaiBD");
+   while (query.next())
+   {
+
+      qDebug()<<"id("<<query.value(0).toInt()<<")  name:"<<query.value(1).toString()<<"  age:"<<query.value(2).toInt();
+
+   }
+    query.exec(QObject::tr("drop GuWuSwitch"));
+
+#endif
 
 }
 
