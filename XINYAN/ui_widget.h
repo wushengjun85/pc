@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'widget.ui'
 **
-** Created: Fri May 5 17:05:02 2017
+** Created: Fri May 5 17:38:48 2017
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -97,10 +97,6 @@ public:
     QLineEdit *lineEdit_12;
     QLineEdit *lineEdit_13;
     QLineEdit *lineEdit_14;
-    QLabel *label_21;
-    QLabel *label_22;
-    QLabel *label_23;
-    QLabel *label_24;
     QLineEdit *lineEdit_15;
 
     void setupUi(QWidget *Widget)
@@ -469,27 +465,6 @@ public:
         lineEdit_14 = new QLineEdit(page_19);
         lineEdit_14->setObjectName(QString::fromUtf8("lineEdit_14"));
         lineEdit_14->setGeometry(QRect(450, 270, 81, 27));
-        label_21 = new QLabel(page_19);
-        label_21->setObjectName(QString::fromUtf8("label_21"));
-        label_21->setGeometry(QRect(270, 130, 41, 231));
-        label_21->setStyleSheet(QString::fromUtf8("font: 75 16pt \"Ubuntu\";\n"
-"color: rgb(255, 255, 255);"));
-        label_21->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
-        label_22 = new QLabel(page_19);
-        label_22->setObjectName(QString::fromUtf8("label_22"));
-        label_22->setGeometry(QRect(450, 120, 111, 31));
-        label_22->setStyleSheet(QString::fromUtf8("font: 75 16pt \"Ubuntu\";\n"
-"color: rgb(255, 255, 255);"));
-        label_23 = new QLabel(page_19);
-        label_23->setObjectName(QString::fromUtf8("label_23"));
-        label_23->setGeometry(QRect(450, 181, 101, 30));
-        label_23->setStyleSheet(QString::fromUtf8("font: 75 16pt \"Ubuntu\";\n"
-"color: rgb(255, 255, 255);"));
-        label_24 = new QLabel(page_19);
-        label_24->setObjectName(QString::fromUtf8("label_24"));
-        label_24->setGeometry(QRect(450, 240, 141, 30));
-        label_24->setStyleSheet(QString::fromUtf8("font: 75 16pt \"Ubuntu\";\n"
-"color: rgb(255, 255, 255);"));
         lineEdit_15 = new QLineEdit(page_19);
         lineEdit_15->setObjectName(QString::fromUtf8("lineEdit_15"));
         lineEdit_15->setGeometry(QRect(480, 310, 111, 31));
@@ -585,10 +560,6 @@ public:
         ___qlistwidgetitem7->setText(QApplication::translate("Widget", "\351\273\221\351\272\246", 0, QApplication::UnicodeUTF8));
         listWidget_7->setSortingEnabled(__sortingEnabled1);
 
-        label_21->setText(QApplication::translate("Widget", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt;\">\350\260\267</span></p><p align=\"center\"><span style=\" font-size:16pt;\">\347\211\251</span></p><p align=\"center\"><span style=\" font-size:16pt;\">\347\247\215</span></p><p align=\"center\"><span style=\" font-size:16pt;\">\347\261\273</span></p></body></html>", 0, QApplication::UnicodeUTF8));
-        label_22->setText(QApplication::translate("Widget", "\345\211\262\345\271\205\345\256\275\345\272\246", 0, QApplication::UnicodeUTF8));
-        label_23->setText(QApplication::translate("Widget", "\350\275\275\350\215\267\347\263\273\346\225\260", 0, QApplication::UnicodeUTF8));
-        label_24->setText(QApplication::translate("Widget", "\350\207\252\345\212\250\350\260\203\351\200\237\347\263\273\346\225\260", 0, QApplication::UnicodeUTF8));
         lineEdit_15->setText(QApplication::translate("Widget", "\346\201\242\345\244\215\351\273\230\350\256\244\345\200\274", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
